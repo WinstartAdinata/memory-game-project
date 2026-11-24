@@ -14,8 +14,8 @@
             <!-- Continue -->
             <a href="#continue"
                 class="flex items-center gap-4 p-4 bg-emerald-50
-                    hover:bg-emerald-100 border border-emerald-100
-                    rounded-2xl transition hover:-translate-y-1">
+                        hover:bg-emerald-100 border border-emerald-100
+                        rounded-2xl transition hover:-translate-y-1">
 
                 <span class="text-2xl bg-emerald-500 p-3 rounded-xl">▶️</span>
 
@@ -26,10 +26,10 @@
             </a>
 
             <!-- New Game -->
-            <a href="#new-game"
+            <a href="{{ route('game.create') }}"
                 class="flex items-center gap-4 p-4 bg-blue-50
-                    hover:bg-blue-100 border border-blue-100
-                    rounded-2xl transition hover:-translate-y-1">
+                        hover:bg-blue-100 border border-blue-100
+                        rounded-2xl transition hover:-translate-y-1">
 
                 <span class="text-2xl bg-blue-600 p-3 rounded-xl">🎮</span>
 
@@ -42,8 +42,8 @@
             <!-- History -->
             <a href="#history"
                 class="flex items-center gap-4 p-4 bg-amber-50
-                    hover:bg-amber-100 border border-amber-100
-                    rounded-2xl transition hover:-translate-y-1">
+                        hover:bg-amber-100 border border-amber-100
+                        rounded-2xl transition hover:-translate-y-1">
 
                 <span class="text-2xl bg-amber-400 p-3 rounded-xl">🏆</span>
 
@@ -54,18 +54,22 @@
             </a>
 
             <!-- Exit -->
-            <a href="#exit"
-                class="flex items-center gap-4 p-4 bg-rose-50
-                    hover:bg-rose-100 border border-rose-100
-                    rounded-2xl transition hover:-translate-y-1">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
 
-                <span class="text-2xl bg-rose-500 p-3 rounded-xl">🚪</span>
+                <button type="submit"
+                    class="flex items-center gap-4 p-4 bg-rose-50
+                    hover:bg-rose-100 border border-rose-100 rounded-2xl
+                    transition hover:-translate-y-1 w-full cursor-pointer">
 
-                <div class="text-left">
-                    <h3 class="font-bold text-lg text-rose-800">Exit</h3>
-                    <p class="text-sm text-rose-600">Leave the game</p>
-                </div>
-            </a>
+                    <span class="text-2xl bg-rose-500 p-3 rounded-xl">🚪</span>
+
+                    <div class="text-left">
+                        <h3 class="font-bold text-lg text-rose-800">Exit</h3>
+                        <p class="text-sm text-rose-600">Leave the game</p>
+                    </div>
+                </button>
+            </form>
 
         </div>
     </div>

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignId('game_id')->constrained()->cascadeOnDelete();
             $table->foreignId('card_id')->constrained()->cascadeOnDelete();
             $table->uuid('group_key');
+            $table->string('image_url');
             $table->unsignedSmallInteger('position');
             $table->boolean('is_matched')->default(false);
             $table->timestamps();

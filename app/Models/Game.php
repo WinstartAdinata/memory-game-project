@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'difficulty',
+        'status',
+        'score',
+        'moves',
+        'elapsed_seconds',
+        'started_at',
+        'paused_at',
+        'completed_at',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
