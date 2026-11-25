@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Services\GetHistoryListService;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
 {
-    public function index()
+    public function index(GetHistoryListService $getHistoryListService)
     {
-        $games = Game::where('user_id', auth()->id())
-            ->whereIn('status', ['completed', 'unfinished'])
-            ->latest()
-            ->paginate(5);
+        $games = $getHistoryListService->getHistoryList(auth()->id());
         return view('history', compact('games'));
     }
 }

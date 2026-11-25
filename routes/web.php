@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/history', [HistoryController::class, 'index'])
         ->name('history.index');
+
+    Route::get('/leaderboard', [LeaderboardController::class, 'index'])
+        ->name('leaderboard.index');
 });

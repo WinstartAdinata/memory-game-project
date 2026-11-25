@@ -27,8 +27,6 @@
                 </a>
             @endif
 
-
-            <!-- New Game -->
             <a href="{{ route('game.create') }}"
                 class="flex items-center gap-4 p-4 bg-blue-50
                 hover:bg-blue-100 border border-blue-100
@@ -42,8 +40,7 @@
                 </div>
             </a>
 
-            <!-- Leaderboard -->
-            <a href="#leaderboard"
+            <a href="{{ route('leaderboard.index') }}"
                 class="flex items-center gap-4 p-4 bg-violet-50
                     hover:bg-violet-100 border border-violet-100
                     rounded-2xl transition hover:-translate-y-1">
@@ -60,7 +57,6 @@
                 </div>
             </a>
 
-            <!-- History -->
             <a href="{{ route('history.index') }}"
                 class="flex items-center gap-4 p-4 bg-amber-50 hover:bg-amber-100 border border-amber-100 rounded-2xl transition hover:-translate-y-1">
 
@@ -72,7 +68,6 @@
                 </div>
             </a>
 
-            <!-- Exit -->
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
 
