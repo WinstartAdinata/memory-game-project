@@ -164,9 +164,12 @@ class GameController extends Controller
                 ->doesntExist();
 
             if ($isCompleted) {
-                $game->elapsed_seconds += now()->diffInSeconds(
-                    $game->last_resumed_at
+                $additionalSeconds = max(
+                    0,
+                    now()->timestamp - $game->last_resumed_at->timestamp
                 );
+
+                $game->elapsed_seconds += (int) $additionalSeconds;
 
                 $game->last_resumed_at = null;
                 $game->status = 'completed';

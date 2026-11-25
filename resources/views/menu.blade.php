@@ -61,10 +61,8 @@
             </a>
 
             <!-- History -->
-            <a href="#history"
-                class="flex items-center gap-4 p-4 bg-amber-50
-                                                                hover:bg-amber-100 border border-amber-100
-                                                                rounded-2xl transition hover:-translate-y-1">
+            <a href="{{ route('history.index') }}"
+                class="flex items-center gap-4 p-4 bg-amber-50 hover:bg-amber-100 border border-amber-100 rounded-2xl transition hover:-translate-y-1">
 
                 <span class="text-2xl bg-amber-400 p-3 rounded-xl">📜</span>
 
@@ -79,9 +77,7 @@
                 @csrf
 
                 <button type="submit"
-                    class="flex items-center gap-4 p-4 bg-rose-50
-                                                            hover:bg-rose-100 border border-rose-100 rounded-2xl
-                                                            transition hover:-translate-y-1 w-full cursor-pointer">
+                    class="flex items-center gap-4 p-4 bg-rose-50 hover:bg-rose-100 border border-rose-100 rounded-2xl transition hover:-translate-y-1 w-full cursor-pointer">
 
                     <span class="text-2xl bg-rose-500 p-3 rounded-xl">🚪</span>
 
