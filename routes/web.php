@@ -40,4 +40,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/game/{game}/move', [GameController::class, 'submitMove'])
         ->name('game.move');
+
+    Route::post('/game/{game}/pause', [GameController::class, 'pause'])
+        ->name('game.pause');
 });

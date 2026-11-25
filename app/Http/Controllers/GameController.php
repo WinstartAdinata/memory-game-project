@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\Card;
 use App\Http\Requests\Game\StoreGameRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +28,12 @@ class GameController extends Controller
 
         $game = DB::transaction(function () use ($request, $validated, $groupCount, $cardsPerGroup) {
 
+            Game::where('user_id', $request->user()->id)
+                ->where('status', 'playing')
+                ->update([
+                    'status' => 'unfinished',
+                ]);
+
             $game = Game::create([
                 'user_id' => $request->user()->id,
                 'difficulty' => $validated['difficulty'],
@@ -35,6 +42,7 @@ class GameController extends Controller
                 'moves' => 0,
                 'elapsed_seconds' => 0,
                 'started_at' => now(),
+                'last_resumed_at' => now(),
             ]);
 
             $selectedCards = Card::query()
@@ -79,11 +87,24 @@ class GameController extends Controller
     {
         $this->authorize('view', $game);
 
+        if (
+            $game->status !== 'playing' &&
+            $game->status !== 'paused'
+        ) {
+            return redirect()->route('menu');
+        }
+
+        if ($game->status === 'paused') {
+            $game->status = 'playing';
+            $game->last_resumed_at = now();
+
+            $game->save();
+        }
+
         $game->load('gameCards');
 
         return view('game.play', compact('game'));
     }
-
 
     public function submitMove(
         SubmitGameMoveRequest $request,
@@ -143,6 +164,11 @@ class GameController extends Controller
                 ->doesntExist();
 
             if ($isCompleted) {
+                $game->elapsed_seconds += now()->diffInSeconds(
+                    $game->last_resumed_at
+                );
+
+                $game->last_resumed_at = null;
                 $game->status = 'completed';
                 $game->completed_at = now();
             }
@@ -168,4 +194,25 @@ class GameController extends Controller
         return response()->json($result);
     }
 
+    public function pause(Game $game)
+    {
+        $this->authorize('view', $game);
+
+        if ($game->status !== 'playing') {
+            return redirect()->route('menu');
+        }
+
+        $additionalSeconds = now()->diffInSeconds(
+            $game->last_resumed_at
+        );
+
+        $game->elapsed_seconds += $additionalSeconds;
+
+        $game->last_resumed_at = null;
+        $game->status = 'paused';
+
+        $game->save();
+
+        return redirect()->route('menu');
+    }
 }

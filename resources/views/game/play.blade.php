@@ -11,14 +11,16 @@
 
         <div class="flex justify-between items-center mb-6">
 
-            <a href="{{ route('menu') }}" class="inline-flex items-center gap-2 px-4 py-2
-                bg-slate-100 hover:bg-slate-200
-                text-slate-700 font-semibold rounded-xl
-                transition">
+            <form action="{{ route('game.pause', $game->id) }}" method="POST">
+                @csrf
 
-                <span>←</span>
-                <span>Back to Menu</span>
-            </a>
+                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2
+            bg-slate-100 hover:bg-slate-200
+            text-slate-700 font-semibold rounded-xl transition">
+                    <span>←</span>
+                    <span>Back to Menu</span>
+                </button>
+            </form>
 
         </div>
 
@@ -67,11 +69,11 @@
 
                     @foreach ($game->gameCards as $card)
                         <button type="button" @click="flipCard({{ $loop->index }})" :disabled="cards[{{ $loop->index }}].isMatched ||
-                                                    isChecking ||
-                                                    isFinished" class="aspect-square rounded-xl overflow-hidden
-                                                    border-2 border-blue-200 shadow-md
-                                                    hover:scale-105 transition cursor-pointer
-                                                    disabled:cursor-not-allowed">
+                                                                    isChecking ||
+                                                                    isFinished" class="aspect-square rounded-xl overflow-hidden
+                                                                    border-2 border-blue-200 shadow-md
+                                                                    hover:scale-105 transition cursor-pointer
+                                                                    disabled:cursor-not-allowed">
 
                             <template x-if="cards[{{ $loop->index }}].isOpen">
                                 <img :src="cards[{{ $loop->index }}].image_url" alt="Memory Card"
@@ -80,8 +82,8 @@
 
                             <template x-if="!cards[{{ $loop->index }}].isOpen">
                                 <div class="w-full h-full bg-linear-to-br
-                                                            from-blue-500 to-purple-500
-                                                            flex items-center justify-center">
+                                                                            from-blue-500 to-purple-500
+                                                                            flex items-center justify-center">
 
                                     <span class="text-4xl">❓</span>
 
@@ -96,7 +98,7 @@
             </div>
 
             <div x-show="isFinished" x-cloak class="bg-emerald-50 border border-emerald-200
-                            rounded-2xl p-6 my-6 text-center">
+                                    rounded-2xl p-6 my-6 text-center">
 
                 <div class="text-5xl mb-3">🎉</div>
 
@@ -123,8 +125,8 @@
                 </div>
 
                 <a href="{{ route('game.create') }}" class="inline-block mt-6 px-8 py-3 bg-blue-600
-                                hover:bg-blue-700 text-white font-bold
-                                rounded-xl transition">
+                                        hover:bg-blue-700 text-white font-bold
+                                        rounded-xl transition">
                     Next Game
                 </a>
 
@@ -149,11 +151,11 @@
                 cards: [],
 
                 score: {{ $game->score }},
-                moves: 0,
+                moves: {{ $game->moves }},
 
                 selectedCards: [],
                 isChecking: false,
-                isFinished: false,
+                isFinished: {{ $game->status === 'completed' ? 'true' : 'false' }},
                 errorMessage: '',
 
                 imagesLoaded: false,
@@ -166,8 +168,8 @@
                                 'id' => $card->id,
                                 'group_key' => $card->group_key,
                                 'image_url' => $card->image_url,
-                                'isOpen' => false,
-                                'isMatched' => false,
+                                'isOpen' => $card->is_matched,
+                                'isMatched' => $card->is_matched,
                             ])
                             ->values()
                     );

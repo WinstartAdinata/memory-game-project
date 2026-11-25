@@ -16,7 +16,7 @@ class Game extends Model
         'moves',
         'elapsed_seconds',
         'started_at',
-        'paused_at',
+        'last_resumed_at',
         'completed_at',
     ];
 
@@ -42,6 +42,7 @@ class Game extends Model
             'moves' => 'integer',
             'elapsed_seconds' => 'integer',
             'started_at' => 'datetime',
+            'last_resumed_at' => 'datetime',
             'completed_at' => 'datetime',
         ];
     }

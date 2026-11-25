@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->unsignedInteger('elapsed_seconds')->default(0);
             $table->timestamp('started_at')->nullable();
             $table->timestamp('completed_at')->nullable();
+            $table->timestamp('last_resumed_at')->nullable();
             $table->timestamps();
         });
     }
