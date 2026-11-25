@@ -37,4 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/game/{game}', [GameController::class, 'play'])
         ->name('game.play');
+
+    Route::post('/game/{game}/move', [GameController::class, 'submitMove'])
+        ->name('game.move');
 });

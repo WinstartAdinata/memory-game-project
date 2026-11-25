@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Game\SubmitGameMoveRequest;
 use App\Models\Game;
 use App\Models\Card;
 use App\Http\Requests\Game\StoreGameRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
@@ -42,18 +44,28 @@ class GameController extends Controller
 
             $position = 1;
 
+            $cards = [];
+
             foreach ($selectedCards as $card) {
                 $groupKey = (string) Str::uuid();
 
                 for ($i = 0; $i < $cardsPerGroup; $i++) {
-                    $game->gameCards()->create([
+                    $cards[] = [
                         'card_id' => $card->id,
                         'group_key' => $groupKey,
                         'image_url' => $card->image_url,
-                        'position' => $position++,
                         'is_matched' => false,
-                    ]);
+                    ];
                 }
+            }
+
+            $cards = collect($cards)->shuffle();
+
+            foreach ($cards as $card) {
+                $game->gameCards()->create([
+                    ...$card,
+                    'position' => $position++,
+                ]);
             }
 
             return $game;
@@ -71,4 +83,89 @@ class GameController extends Controller
 
         return view('game.play', compact('game'));
     }
+
+
+    public function submitMove(
+        SubmitGameMoveRequest $request,
+        Game $game
+    ): JsonResponse {
+        $this->authorize('view', $game);
+
+        $validated = $request->validated();
+
+        $result = DB::transaction(function () use ($game, $validated) {
+
+            $game = Game::query()
+                ->whereKey($game->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($game->status !== 'playing') {
+                abort(422, 'This game is no longer active.');
+            }
+
+            $expectedCards = $game->difficulty === 'easy' ? 2 : 3;
+
+            if (count($validated['cards']) !== $expectedCards) {
+                abort(422, 'Invalid number of selected cards.');
+            }
+
+            $cards = $game->gameCards()
+                ->whereIn('id', $validated['cards'])
+                ->lockForUpdate()
+                ->get();
+
+            if ($cards->count() !== $expectedCards) {
+                abort(422, 'Invalid card selection.');
+            }
+
+            if ($cards->contains('is_matched', true)) {
+                abort(422, 'A matched card cannot be selected again.');
+            }
+
+            $isMatch = $cards->pluck('group_key')->unique()->count() === 1;
+
+            $pointsChanged = $isMatch ? 2 : -1;
+
+            if ($isMatch) {
+                $game->gameCards()
+                    ->whereIn('id', $validated['cards'])
+                    ->update([
+                        'is_matched' => true,
+                    ]);
+            }
+
+            $game->score += $pointsChanged;
+            $game->moves += 1;
+
+            $isCompleted = $game->gameCards()
+                ->where('is_matched', false)
+                ->doesntExist();
+
+            if ($isCompleted) {
+                $game->status = 'completed';
+                $game->completed_at = now();
+            }
+
+            $game->save();
+
+            $game->logs()->create([
+                'cards' => $cards->pluck('id')->values()->all(),
+                'points_changed' => $pointsChanged,
+                'action_type' => $isMatch ? 'match' : 'miss',
+                'score_after' => $game->score,
+                'move_number' => $game->moves,
+            ]);
+
+            return [
+                'matched' => $isMatch,
+                'score' => $game->score,
+                'moves' => $game->moves,
+                'completed' => $isCompleted,
+            ];
+        });
+
+        return response()->json($result);
+    }
+
 }

@@ -24,10 +24,10 @@
 
                     <div
                         class="flex flex-col items-center gap-3 p-6
-                bg-emerald-50 hover:bg-emerald-100
-                border-2 border-emerald-200 rounded-2xl
-                transition peer-checked:border-emerald-500
-                peer-checked:bg-emerald-100">
+                    bg-emerald-50 hover:bg-emerald-100
+                    border-2 border-emerald-200 rounded-2xl
+                    transition peer-checked:border-emerald-500
+                    peer-checked:bg-emerald-100">
 
                         <span class="text-5xl">🐣</span>
 
@@ -51,10 +51,10 @@
 
                     <div
                         class="flex flex-col items-center gap-3 p-6
-                bg-amber-50 hover:bg-amber-100
-                border-2 border-amber-200 rounded-2xl
-                transition peer-checked:border-amber-500
-                peer-checked:bg-amber-100">
+                    bg-amber-50 hover:bg-amber-100
+                    border-2 border-amber-200 rounded-2xl
+                    transition peer-checked:border-amber-500
+                    peer-checked:bg-amber-100">
 
                         <span class="text-5xl">🐓</span>
 
@@ -77,8 +77,8 @@
             <div class="flex justify-center mt-8">
                 <button type="submit"
                     class="px-8 py-3 bg-blue-600 hover:bg-blue-700
-            text-white font-bold rounded-xl transition
-            cursor-pointer">
+                text-white font-bold rounded-xl transition
+                cursor-pointer">
                     Start Game
                 </button>
             </div>
@@ -87,7 +87,7 @@
         <div class="flex justify-center mt-8">
             <a href="{{ route('menu') }}"
                 class="px-6 py-3 bg-slate-100 hover:bg-slate-200
-                        text-slate-700 font-semibold rounded-xl transition">
+                            text-slate-700 font-semibold rounded-xl transition">
                 ← Back to Menu
             </a>
         </div>
