@@ -25,4 +25,12 @@ class GameCard extends Model
     {
         return $this->belongsTo(Card::class);
     }
+
+    protected function casts(): array
+    {
+        return [
+            'position' => 'integer',
+            'is_matched' => 'boolean',
+        ];
+    }
 }

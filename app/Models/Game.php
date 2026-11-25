@@ -34,4 +34,15 @@ class Game extends Model
     {
         return $this->hasMany(Log::class);
     }
+
+    protected function casts(): array
+    {
+        return [
+            'score' => 'integer',
+            'moves' => 'integer',
+            'elapsed_seconds' => 'integer',
+            'started_at' => 'datetime',
+            'completed_at' => 'datetime',
+        ];
+    }
 }
