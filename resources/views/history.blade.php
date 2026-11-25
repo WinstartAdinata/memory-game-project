@@ -28,7 +28,7 @@
         @else
             <div class="space-y-3">
 
-                @foreach ($games as $index => $game)
+                @foreach ($games as $game)
                     <div
                         class="p-4 bg-violet-50 hover:bg-violet-100
                         border border-violet-100 rounded-2xl transition">
@@ -37,27 +37,37 @@
 
                             <div>
                                 <h3 class="font-bold text-lg text-violet-800">
-                                    Game #{{ $games->firstItem() + $index }}
+                                    {{ $game->created_at->format('d M Y') }}
                                 </h3>
 
                                 <p class="text-sm text-violet-600">
-                                    {{ $game->created_at->format('d M Y, H:i') }}
+                                    {{ $game->created_at->format('H:i') }}
                                 </p>
                             </div>
 
-                            @if ($game->status === 'completed')
+                            <div class="flex flex-col items-end gap-2">
+
+                                @if ($game->status === 'completed')
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs font-bold
+                bg-emerald-100 text-emerald-700">
+                                        Completed
+                                    </span>
+                                @else
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs font-bold
+                bg-orange-100 text-orange-700">
+                                        Incomplete
+                                    </span>
+                                @endif
+
                                 <span
                                     class="px-3 py-1 rounded-full text-xs font-bold
-                                    bg-emerald-100 text-emerald-700">
-                                    Completed
+            {{ $game->difficulty === 'easy' ? 'bg-emerald-100 text-emerald-700' : 'bg-orange-100 text-orange-700' }}">
+                                    {{ ucfirst($game->difficulty) }}
                                 </span>
-                            @else
-                                <span
-                                    class="px-3 py-1 rounded-full text-xs font-bold
-                                    bg-amber-100 text-amber-700">
-                                    Incomplete
-                                </span>
-                            @endif
+
+                            </div>
 
                         </div>
 

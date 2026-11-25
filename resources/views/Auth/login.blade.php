@@ -59,7 +59,7 @@
             <!-- Login Button -->
             <button type="submit"
                 class="w-full py-3 bg-blue-600 hover:bg-blue-700
-                    text-white font-bold rounded-xl shadow-md transition">
+                    text-white font-bold rounded-xl shadow-md transition cursor-pointer">
                 Login
             </button>
         </form>
