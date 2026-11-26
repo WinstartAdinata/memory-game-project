@@ -17,7 +17,9 @@
                 </p>
             </div>
 
-            <a href="{{ route('menu') }}" class="text-sm font-semibold text-violet-600 hover:text-violet-800 transition">
+            <a href="{{ route('menu') }}"
+                class="px-6 py-3 bg-slate-100 hover:bg-slate-200
+                            text-slate-700 font-semibold rounded-xl transition">
                 ← Back to Menu
             </a>
         </div>
