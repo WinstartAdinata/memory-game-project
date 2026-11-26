@@ -8,7 +8,7 @@ class GetHistoryListService
 {
     public function execute($userId)
     {
-        return Game::where($userId)
+        return Game::where('user_id', $userId)
             ->whereIn('status', ['completed', 'unfinished'])
             ->latest()
             ->paginate(5);

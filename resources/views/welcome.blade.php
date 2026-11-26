@@ -2168,7 +2168,7 @@
     <div
         class="min-h-screen flex items-center justify-center p-6
     bg-linear-to-br from-blue-100 via-purple-50 to-pink-100">
-        <div class="w-full max-w-md text-center">
+        <div class="w-full max-w-3xl text-center">
             @yield('content')
         </div>
     </div>
