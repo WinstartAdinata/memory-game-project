@@ -76,7 +76,7 @@
                                         </td>
 
                                         <td class="py-3 px-2 font-medium">
-                                            {{ $player->username }}
+                                            {{ Str::words($player->user->name, 2, '') }}
                                         </td>
 
                                         <td class="py-3 px-2 text-right font-bold text-emerald-700">
@@ -122,7 +122,7 @@
                                         </td>
 
                                         <td class="py-3 px-2 font-medium">
-                                            {{ $player->username }}
+                                            {{ Str::words($player->user->name, 2, '') }}
                                         </td>
 
                                         <td class="py-3 px-2 text-right font-bold text-violet-700 whitespace-nowrap">
@@ -176,7 +176,7 @@
                                         </td>
 
                                         <td class="py-3 px-2 font-medium">
-                                            {{ $player->username }}
+                                            {{ Str::words($player->user->name, 2, '') }}
                                         </td>
 
                                         <td class="py-3 px-2 text-right font-bold text-emerald-700">
@@ -222,7 +222,7 @@
                                         </td>
 
                                         <td class="py-3 px-2 font-medium">
-                                            {{ $player->username }}
+                                            {{ Str::words($player->user->name, 2, '') }}
                                         </td>
 
                                         <td class="py-3 px-2 text-right font-bold text-violet-700 whitespace-nowrap">
