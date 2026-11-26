@@ -5,18 +5,7 @@
 
     <div x-data="{ activeTab: 'easy' }" class="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-7">
 
-        {{-- Page Title --}}
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <h2 class="text-2xl font-bold text-slate-800">
-                    🏆 Leaderboard
-                </h2>
-
-                <p class="text-sm text-slate-500 mt-1">
-                    See the best players and their records
-                </p>
-            </div>
-
+        <div class="flex justify-left mb-8">
             <a href="{{ route('menu') }}"
                 class="px-6 py-3 bg-slate-100 hover:bg-slate-200
                             text-slate-700 font-semibold rounded-xl transition">
@@ -24,7 +13,6 @@
             </a>
         </div>
 
-        {{-- Tabs --}}
         <div class="flex gap-3 mb-7">
 
             <button @click="activeTab = 'easy'"
@@ -47,12 +35,10 @@
 
         </div>
 
-        {{-- EASY TAB --}}
         <div x-show="activeTab === 'easy'" x-cloak>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                {{-- Highest Score --}}
                 <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
 
                     <h3 class="text-lg font-bold text-emerald-800 mb-4">
@@ -98,7 +84,6 @@
                     </div>
                 </div>
 
-                {{-- Fastest Time --}}
                 <div class="bg-violet-50 border border-violet-100 rounded-2xl p-5">
 
                     <h3 class="text-lg font-bold text-violet-800 mb-4">
@@ -147,12 +132,10 @@
             </div>
         </div>
 
-        {{-- HARD TAB --}}
         <div x-show="activeTab === 'hard'" x-cloak>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                {{-- Highest Score --}}
                 <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
 
                     <h3 class="text-lg font-bold text-emerald-800 mb-4">
@@ -198,7 +181,6 @@
                     </div>
                 </div>
 
-                {{-- Fastest Time --}}
                 <div class="bg-violet-50 border border-violet-100 rounded-2xl p-5">
 
                     <h3 class="text-lg font-bold text-violet-800 mb-4">

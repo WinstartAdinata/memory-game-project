@@ -5,10 +5,6 @@
 
     <div x-data="memoryGame()" class="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-7">
 
-        <h2 class="text-2xl font-bold text-slate-800 mb-6">
-            Memory Game
-        </h2>
-
         <div class="flex justify-between items-center mb-6">
 
             <form action="{{ route('game.pause', $game->id) }}" method="POST">

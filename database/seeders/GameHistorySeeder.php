@@ -35,7 +35,7 @@ class GameHistorySeeder extends Seeder
                         'hard',
                     ]),
                     'status' => $status,
-                    'score' => rand(0, 10),
+                    'score' => rand(-10, 10),
                     'moves' => rand(5, 20),
                     'elapsed_seconds' => $elapsedSeconds,
                     'started_at' => $startedAt,
