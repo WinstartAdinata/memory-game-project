@@ -6,7 +6,7 @@ use App\Models\Game;
 
 class GetHistoryListService
 {
-    public function getHistoryList($userId)
+    public function execute($userId)
     {
         return Game::where($userId)
             ->whereIn('status', ['completed', 'unfinished'])

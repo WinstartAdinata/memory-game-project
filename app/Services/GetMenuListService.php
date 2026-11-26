@@ -6,7 +6,7 @@ use App\Models\Game;
 
 class GetMenuListService
 {
-    public function getMenuList($userId)
+    public function execute($userId)
     {
         return Game::where('user_id', $userId)
             ->where('status', 'paused')
