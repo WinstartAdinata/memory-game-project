@@ -18,7 +18,6 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
-                <!-- Easy -->
                 <label class="cursor-pointer">
                     <input type="radio" name="difficulty" value="easy" class="peer sr-only" required>
 
@@ -45,7 +44,6 @@
                     </div>
                 </label>
 
-                <!-- Hard -->
                 <label class="cursor-pointer">
                     <input type="radio" name="difficulty" value="hard" class="peer sr-only">
 

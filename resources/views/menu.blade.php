@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.header')
-    <!-- Main Menu -->
+
     <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-7">
 
         <h2 class="text-2xl font-bold text-slate-800 mb-6">
@@ -12,7 +12,6 @@
         <div class="space-y-3">
 
             @if (isset($continueGame))
-                <!-- Continue -->
                 <a href="{{ route('game.play', $continueGame->id) }}"
                     class="flex items-center gap-4 p-4 bg-emerald-50
                     hover:bg-emerald-100 border border-emerald-100

@@ -8,7 +8,8 @@ class HistoryController extends Controller
 {
     public function index(GetHistoryListService $getHistoryListService)
     {
-        $games = $getHistoryListService->execute(auth()->id());
-        return view('history', compact('games'));
+        $data = $getHistoryListService->execute(auth()->id());
+
+        return view('history', $data);
     }
 }
