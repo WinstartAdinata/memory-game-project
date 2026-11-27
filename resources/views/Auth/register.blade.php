@@ -3,7 +3,6 @@
 @section('content')
     @include('layouts.header')
 
-    <!-- Register Form -->
     <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-7">
 
         <h2 class="text-2xl font-bold text-slate-800 mb-2">
@@ -29,7 +28,6 @@
         <form action="{{ route('register.store') }}" method="POST" class="space-y-4">
             @csrf
 
-            <!-- Name -->
             <div class="text-left">
                 <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">
                     Full Name
@@ -41,7 +39,6 @@
                         focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
-            <!-- Email -->
             <div class="text-left">
                 <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">
                     Email Address
@@ -53,7 +50,6 @@
                         focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
-            <!-- Password -->
             <div class="text-left">
                 <label for="password" class="block text-sm font-semibold text-slate-700 mb-2">
                     Password
@@ -64,7 +60,6 @@
                         focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
-            <!-- Confirm Password -->
             <div class="text-left">
                 <label for="password_confirmation" class="block text-sm font-semibold text-slate-700 mb-2">
                     Confirm Password
@@ -76,7 +71,6 @@
                         focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
-            <!-- Register Button -->
             <button type="submit"
                 class="w-full py-3 bg-blue-600 hover:bg-blue-700
                     text-white font-bold rounded-xl shadow-md transition cursor-pointer">
@@ -84,7 +78,6 @@
             </button>
         </form>
 
-        <!-- Login Link -->
         <p class="text-sm text-slate-500 mt-6">
             Already have an account?
             <a href="{{ route('login') }}" class="text-blue-600 font-bold hover:text-blue-800">

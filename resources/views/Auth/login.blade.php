@@ -3,7 +3,6 @@
 @section('content')
     @include('layouts.header')
 
-    <!-- Login Form -->
     <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-7">
 
         <h2 class="text-2xl font-bold text-slate-800 mb-2">
@@ -33,7 +32,6 @@
         <form action="{{ route('login.store') }}" method="POST" class="space-y-4">
             @csrf
 
-            <!-- Email -->
             <div class="text-left">
                 <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">
                     Email Address
@@ -45,7 +43,6 @@
                         focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
-            <!-- Password -->
             <div class="text-left">
                 <label for="password" class="block text-sm font-semibold text-slate-700 mb-2">
                     Password
@@ -56,7 +53,6 @@
                         focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
-            <!-- Login Button -->
             <button type="submit"
                 class="w-full py-3 bg-blue-600 hover:bg-blue-700
                     text-white font-bold rounded-xl shadow-md transition cursor-pointer">
@@ -64,7 +60,6 @@
             </button>
         </form>
 
-        <!-- Register Link -->
         <p class="text-sm text-slate-500 mt-6">
             Don't have an account?
             <a href="{{ route('register') }}" class="text-blue-600 font-bold hover:text-blue-800">
